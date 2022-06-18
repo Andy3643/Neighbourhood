@@ -18,6 +18,10 @@ class Neighborhood(models.Model):
     def delete_neighborhood(self):
         self.delete()
 
+
+    def __str__(self):
+         return f'{self.name} neighborhood'
+     
 class Profile(models.Model):
     '''
     class for user profiles
@@ -25,8 +29,63 @@ class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     id_number = models.IntegerField(blank=True,null=True)
     profile_pic = CloudinaryField('image')
+    email = models.EmailField()
     bio = models.TextField(blank=True)
     neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE,blank=True,null=True)
 
     def __str__(self):
         return f'{self.user.username} profile'
+    
+class Stories(models.Model):
+    '''
+    class for stories in neighbourhood
+    '''
+    title = models.CharField(max_length=30)
+    headline = models.TextField(max_length=255)
+    story = models.TextField()
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.title} story from {self.neighborhood.name} Neighborhood'
+    
+    
+class Business(models.Model):
+    '''
+    Model for business class in neighbourhood
+    '''
+    business_name = models.CharField(max_length=40)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+    business_email = models.EmailField()
+    business_number = models.IntegerField(blank=True,null=True)
+
+    @classmethod
+    def buisness_search(cls,search_term):
+        return cls.objects.filter(buisness_name__icontains=search_term)
+
+    def __str__(self):
+        return f'Buisness {self.buisness_name} Owned by {self.user.username}'
+
+class Neighborhood_contact(models.Model):
+    '''
+    Information for public departmant contacts
+    '''
+    department = models.CharField(max_length=30)
+    contact_number = models.IntegerField()
+    contact_email = models.EmailField()
+    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.department} department contact from {self.Neighborhood.name} neighborhood'
+
+class Announcement(models.Model):
+    '''
+    Announcements model
+    '''
+    title = models.CharField(max_length=30)
+    announcement = models.TextField()
+    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.title} Announcement for {self.neighborhood.name} Neighborhood' 
