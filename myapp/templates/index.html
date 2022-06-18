@@ -1,3 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% include 'navbar.html' %}
 <h1>Hi josh</h1>
 <a href="{% url 'login'%}"><button>Login</button></a>
 <a href="{% url 'register' %}"><button>Sign-up</button></a>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <h3 class="text-center">Businesses Around</h3>
+            <div class="card">
+                <div class="card-header">
+                Quote
+                </div>
+                <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                </blockquote>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <!--Post for the neighbourhood-->
+        <div class="col-7">
+            {% if neighborhood_stories %}
+            {% for story in neighborhood_stories %}
+            <div class="card">
+                <div class="card-header">
+                Quote
+                </div>
+                <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                </blockquote>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title">Note!!</div>
+                    <div class="card-text">Are you registerd at a neighborhood? if you are then there are no stories for
+                        this hood yet</div>
+                    <div>
+                    </div>
+                    <p>Update Profile</p>
+                    </div>
+            </div>
+            {% endif %}
+
+        </div>
+
+
+
+
+    </div>
+</div>
+
+{% endblock %}
