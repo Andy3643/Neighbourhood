@@ -34,7 +34,7 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['bio','neighborhood','profile_pic']
         
         
-class NeighborhoodBuisnessesForm(forms.ModelForm):
+class BuisnessesForm(forms.ModelForm):
     '''
     Form for advertising a a buisness
     '''
@@ -43,3 +43,10 @@ class NeighborhoodBuisnessesForm(forms.ModelForm):
         fields = ["business_name","business_email","business_number"]
         
 
+class StoryForm(forms.ModelForm):
+    '''
+    Form for uploading stories
+    '''
+    class Meta:
+        model = Stories
+        fields = ["category","headline","story"]

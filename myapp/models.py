@@ -63,8 +63,9 @@ class Stories(models.Model):
     '''
     class for stories in neighbourhood
     '''
-    title = models.CharField(max_length=30)
-    headline = models.TextField(max_length=255)
+    category = models.CharField(max_length=30)
+    #headline = models.TextField(max_length=255)
+    headline = models.CharField(max_length=150)
     story = models.TextField()
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
@@ -76,7 +77,7 @@ class Stories(models.Model):
         self.delete()
     
     def __str__(self):
-        return f'{self.title} story from {self.neighborhood.name} Neighborhood'
+        return f'{self.category} story from {self.neighborhood.name} Neighborhood'
     
     
 class Business(models.Model):

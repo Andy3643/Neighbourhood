@@ -82,16 +82,16 @@ def profile(request):
 
 
 #@login_required
-def create_story(request):
+def new_story(request):
     '''
-    will handle the creation of neihbourhood storys
+    Add neighbourhood stories
     '''
     current_user = request.user
     current_user_neighborhood = request.user.profile.neighborhood
     title = "Post a story"
     if current_user_neighborhood:
         if request.method == "POST":
-            form = NeighborhoodStoryForm(request.POST)
+            form = StoryForm(request.POST)
             if form.is_valid():
                 story = form.save(commit=False)
                 story.user = current_user
@@ -99,8 +99,8 @@ def create_story(request):
                 story.save()
                 return redirect(Index_view)
         else:
-            form = NeighborhoodStoryForm()
-            return render(request,"main/post_story.html",{"form":form})
+            form = StoryForm()
+            return render(request,"stories/post-story.html",{"form":form})
     else:
         messages.warning(request,"Please Join a neighbourhood to post a story")
         return redirect(Index_view)
@@ -133,7 +133,7 @@ def add_buisness(request):
     '''
     current_user_neighborhood = request.user.profile.neighborhood
     if request.method == "POST":
-        form = NeighborhoodBuisnessesForm(request.POST)
+        form = BuisnessesForm(request.POST)
         if form.is_valid():
             buisness = form.save(commit=False)
             buisness.user = request.user
@@ -141,5 +141,5 @@ def add_buisness(request):
             buisness.save()
             return redirect(Index_view)
     else:
-        form = NeighborhoodBuisnessesForm()
+        form = BuisnessesForm()
         return render(request,"main/buisness_form.html",{"form":form})
