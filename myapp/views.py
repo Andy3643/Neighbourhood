@@ -127,19 +127,19 @@ def person_info(request):
 
 
 #@login_required
-def add_buisness(request):
+def new_business(request):
     '''
     This view will handle user adding buisness to neighbourehood 
     '''
-    current_user_neighborhood = request.user.profile.neighborhood
+    current_neighborhood_user = request.user.profile.neighborhood
     if request.method == "POST":
-        form = BuisnessesForm(request.POST)
+        form = BusinessForm(request.POST)
         if form.is_valid():
             buisness = form.save(commit=False)
             buisness.user = request.user
-            buisness.neighborhood = current_user_neighborhood
+            buisness.neighborhood = current_neighborhood_user
             buisness.save()
             return redirect(Index_view)
     else:
-        form = BuisnessesForm()
-        return render(request,"main/buisness_form.html",{"form":form})
+        form = BusinessForm()
+        return render(request,"stories/post_business.html",{"form":form})

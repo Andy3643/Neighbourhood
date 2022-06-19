@@ -34,13 +34,13 @@ class ProfileUpdateForm(forms.ModelForm):
         fields = ['bio','neighborhood','profile_pic']
         
         
-class BuisnessesForm(forms.ModelForm):
+class BusinessForm(forms.ModelForm):
     '''
     Form for advertising a a buisness
     '''
     class Meta:
         model = Business
-        fields = ["business_name","business_email","business_number"]
+        fields = ["business_name","description","business_email","business_number"]
         
 
 class StoryForm(forms.ModelForm):
