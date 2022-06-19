@@ -15,10 +15,12 @@
 <div class="container">
     <div class="row">
         <div class="col-4">
-            <h3 class="text-center">Businesses Around</h3>
+            <div class="text-center " style="background-color:rgb(172, 24, 73);">
+                <h4 style="color: white;">Businesses Around</h4>
+            </div>
             <div class="card">
                 <div class="card-header">
-                Quote
+                
                 </div>
                 <div class="card-body">
                 <blockquote class="blockquote mb-0">
@@ -31,21 +33,26 @@
         <div class="col-1"></div>
         <!--Post for the neighbourhood-->
         <div class="col-7">
+            <div class="text-center " style="background-color:rgb(172, 24, 73);">
+                <h2 style="color: white;">Neighborhood Stories</h2>
+            </div>
             {% if neighborhood_stories %}
             {% for story in neighborhood_stories %}
-            <div class="card">
+            <div class="card mt-4">
                 <div class="card-header">
-                Quote
+                <img src="{{ story.user.profile.profile_pic.url }}" alt="profile image" class="rounded-circle profile-img" width="10%">
+                &nbsp;&nbsp;{{ story.user.username }}
                 </div>
                 <div class="card-body">
                 <blockquote class="blockquote mb-0">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                    <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                    <h4 class="text-center" style="color:rgb(172, 24, 73);">{{ story.headline }}</h4>
+                    <p>{{ story.story }}</p>
                 </blockquote>
                 </div>
             </div>
             {% endfor %}
             {% else %}
+
             <div class="card">
                 <div class="card-body">
                     <div class="card-title">Note!!</div>
