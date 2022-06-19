@@ -5,9 +5,7 @@ from .models import *
 #from django.contrib.auth.decorators import login_required
 
 
-# Create your views here.
-def Index_view(request):
-      return render(request,"index.html")   
+# Create your views here. 
   
 def register(request):
     '''
@@ -29,7 +27,7 @@ def register(request):
 
 #Home page
 #@login_required
-def index_view(request):
+def Index_view(request):
     '''
     Main home page view
     '''
@@ -54,3 +52,94 @@ def index_view(request):
     }
 
     return render(request,"index.html",context)
+
+
+
+
+#@login_required
+def profile(request):
+    '''
+    This method handles the user profile 
+    '''
+    title = 'Profile'
+    if request.method == "POST":
+        u_form = UserUpdateForm(request.POST,instance=request.user)
+        p_form = ProfileUpdateForm(request.POST,request.FILES,instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request,f"You Have Successfully Updated Your Profile!")
+            return redirect('profile')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+    context = {
+        'title':title,
+        'u_form':u_form,
+        'p_form':p_form 
+    }
+    return render(request,'users/profile.html',context)
+
+
+#@login_required
+def create_story(request):
+    '''
+    will handle the creation of neihbourhood storys
+    '''
+    current_user = request.user
+    current_user_neighborhood = request.user.profile.neighborhood
+    title = "Post a story"
+    if current_user_neighborhood:
+        if request.method == "POST":
+            form = NeighborhoodStoryForm(request.POST)
+            if form.is_valid():
+                story = form.save(commit=False)
+                story.user = current_user
+                story.neighborhood = current_user_neighborhood
+                story.save()
+                return redirect(Index_view)
+        else:
+            form = NeighborhoodStoryForm()
+            return render(request,"main/post_story.html",{"form":form})
+    else:
+        messages.warning(request,"Please Join a neighbourhood to post a story")
+        return redirect(Index_view)
+
+
+
+#@login_required
+def person_info(request):
+    '''
+    will show users profile and their neighbours
+    '''
+    current_user = request.user
+    profile = request.user.profile
+    current_neighborhood_user = request.user.profile.neighborhood
+    neighbours = Profile.objects.filter(neighborhood=current_neighborhood_user)
+    context = {
+        "neighbours":neighbours.exclude(user=current_user),
+        "profile":profile,
+        "current_user":current_user
+    }
+
+    return render(request,"users/my_profile.html",context)
+
+
+
+#@login_required
+def add_buisness(request):
+    '''
+    This view will handle user adding buisness to neighbourehood 
+    '''
+    current_user_neighborhood = request.user.profile.neighborhood
+    if request.method == "POST":
+        form = NeighborhoodBuisnessesForm(request.POST)
+        if form.is_valid():
+            buisness = form.save(commit=False)
+            buisness.user = request.user
+            buisness.neighborhood = current_user_neighborhood
+            buisness.save()
+            return redirect(Index_view)
+    else:
+        form = NeighborhoodBuisnessesForm()
+        return render(request,"main/buisness_form.html",{"form":form})

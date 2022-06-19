@@ -1,6 +1,10 @@
+from ast import Delete
 from django.db import models
 from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 
 # Create your models here.
 class Neighborhood(models.Model):
@@ -9,8 +13,7 @@ class Neighborhood(models.Model):
     '''
     name = models.CharField(max_length=40)
     location = models.CharField(max_length=250)
-    # occupants_count = models.IntegerField()
-    admin = models.ForeignKey(User,on_delete=models.CASCADE)
+    admin = models.OneToOneField(User,on_delete=models.CASCADE)
 
     def create_neighborhood(self):
         self.save()
@@ -18,9 +21,20 @@ class Neighborhood(models.Model):
     def delete_neighborhood(self):
         self.delete()
 
+    @classmethod
+    def find_neighborhood(cls):
+        pass
+
+    @classmethod
+    def update_neighborhood(cls):
+        pass
+
+    @classmethod
+    def update_occupants(cls):
+        pass
 
     def __str__(self):
-         return f'{self.name} neighborhood'
+         return self.name
      
 class Profile(models.Model):
     '''
@@ -33,8 +47,17 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE,blank=True,null=True)
 
+    
     def __str__(self):
         return f'{self.user.username} profile'
+    @receiver(post_save,sender=User) 
+    def create_user_profile(sender,instance,created,**kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save,sender=User) 
+    def save_user_profile(sender,instance,**kwargs):
+        instance.profile.save()
     
 class Stories(models.Model):
     '''
@@ -45,6 +68,12 @@ class Stories(models.Model):
     story = models.TextField()
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
+    
+    def save_stories(self):
+        self.save()
+        
+    def delete_stories(self):
+        self.delete()
     
     def __str__(self):
         return f'{self.title} story from {self.neighborhood.name} Neighborhood'
@@ -60,12 +89,37 @@ class Business(models.Model):
     business_email = models.EmailField()
     business_number = models.IntegerField(blank=True,null=True)
 
-    @classmethod
-    def buisness_search(cls,search_term):
-        return cls.objects.filter(buisness_name__icontains=search_term)
-
     def __str__(self):
-        return f'Buisness {self.buisness_name} Owned by {self.user.username}'
+        return self.business_name
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def search_business(cls,search_term):
+        business = Business.objects.get(business_name__icontains=search_term)
+        return business
+
+    def update_business(self):
+        self.save()
+
+
+
+    # def save_business(self):
+    #     self.save()
+        
+    # def delete_business(self):
+    #     self.delete()
+
+    # @classmethod
+    # def business_search(cls,search_term):
+    #     return cls.objects.filter(business_name__icontains=search_term)
+
+    # def __str__(self):
+    #     return f'Business {self.business_name} Owned by {self.user.username}'
 
 class Neighborhood_contact(models.Model):
     '''
@@ -89,3 +143,4 @@ class Announcement(models.Model):
 
     def __str__(self):
         return f'{self.title} Announcement for {self.neighborhood.name} Neighborhood' 
+
