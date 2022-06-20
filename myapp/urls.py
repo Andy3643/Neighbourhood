@@ -11,8 +11,7 @@ urlpatterns = [
     path('^profile/',views.profile,name="profile"),
     path('^addstory/$',views.new_story,name="new_story"),
     path('^myprofile/$',views.person_info,name="user_profile"),
-    path('^addbusiness/$',views.new_business,name="register-business")
-
-
+    path('^addbusiness/$',views.new_business,name="register-business"),
+    path('^hood-contacts/$',views.show_contact,name="show-contact")
 
 ]

@@ -143,3 +143,15 @@ def new_business(request):
     else:
         form = BusinessForm()
         return render(request,"stories/post_business.html",{"form":form})
+    
+def show_contact(request):
+    '''
+    function to display contacts in the neighbourhood
+    '''
+    
+    current_neighborhood_user = request.user.profile.neighborhood
+    neighborhood_contacts = Neighborhood_contact.objects.filter(neighborhood=current_neighborhood_user)
+    context = {
+        "neighborhood_contacts":neighborhood_contacts
+    }
+    return render(request,"stories/contacts.html",context)

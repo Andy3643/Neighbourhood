@@ -133,7 +133,7 @@ class Neighborhood_contact(models.Model):
     neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.department} department contact from {self.Neighborhood.name} neighborhood'
+        return f'{self.department} department contact from {self.neighborhood.name} Neighborhood'
 
 class Announcement(models.Model):
     '''

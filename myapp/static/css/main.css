@@ -1,0 +1,25 @@
+h1{
+    color: red;
+}
+.contactbtn{
+    color: white;
+    font-weight: bold;
+    background-color:rgb(172, 24, 73);
+    border: none;
+    padding: 0.5%;
+    position: fixed;
+    bottom: 6%;
+    left: 3%;
+}
+.contactbtn:hover{
+    background-color: green;
+}
+#hint_id_password1{
+    display: none;
+}
+#hint_id_username{
+    display: none;
+}
+#hint_id_password2{
+    display: none;
+}
