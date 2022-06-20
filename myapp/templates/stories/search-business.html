@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container" id="bg-search">
+            <div class="row">
+                    {% if businesses%}
+                      <h2>Found {{ businesses|length }} of searched term {{message}}</h2>
+                    {% else %}
+                      <h2> Found 0 business for the search term {{message}}</h2>
+                    {% endif %}
+                
+                  </div>
+                
+                  <div class="row">
+                
+                  {% if businesses %}
+                    {% for business in businesses %}
+                    <div style="color: white; border:white;">
+                      <div class="col-sm-6 col-md-6">
+                        <h2>Name: {{ business.business_name }}</h2>
+                        <p>Number: {{ business.business_number }}</p>
+                        <p>Neighborhood: {{ business.neighborhood.name }}</p>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  {% endif %}
+                  </div>
+    </div>
+
+{% endblock %}

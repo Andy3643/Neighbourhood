@@ -40,14 +40,14 @@ def Index_view(request):
     neighborhood_stories = Stories.objects.filter(neighborhood=current_neighborhood_user)
     neighborhood_contacts = Neighborhood_contact.objects.filter(neighborhood=current_neighborhood_user)
     neighborhood_business = Business.objects.filter(neighborhood=current_neighborhood_user)
-    neighborhood_announcements = Announcement.objects.filter(neighborhood=current_neighborhood_user)
+  #  neighborhood_announcements = Announcement.objects.filter(neighborhood=current_neighborhood_user)
 
     context = {
         "title":title,
         "neighborhood_stories":neighborhood_stories,
         "neighborhood_contacts":neighborhood_contacts,
         "neighborhood_business":neighborhood_business,
-        "neighborhood_announcements":neighborhood_announcements,
+     #   "neighborhood_announcements":neighborhood_announcements,
         "admin":user_status
     }
 
@@ -124,8 +124,6 @@ def person_info(request):
 
     return render(request,"users/my_profile.html",context)
 
-
-
 #@login_required
 def new_business(request):
     '''
@@ -143,7 +141,8 @@ def new_business(request):
     else:
         form = BusinessForm()
         return render(request,"stories/post_business.html",{"form":form})
-    
+ 
+#@login_required   
 def show_contact(request):
     '''
     function to display contacts in the neighbourhood
@@ -155,3 +154,16 @@ def show_contact(request):
         "neighborhood_contacts":neighborhood_contacts
     }
     return render(request,"stories/contacts.html",context)
+
+#@login_required
+def search_business(request):
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        searched_businesses = Business.search_business(search_term)
+        message = f"{search_term}"
+
+        return render(request, 'stories/search-business.html',{"message":message,"businesses": searched_businesses})
+
+    else:
+        message = "You haven't searched for any term"
+        return render(request, 'stories/search-business.html',{"message":message})

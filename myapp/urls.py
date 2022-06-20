@@ -12,6 +12,8 @@ urlpatterns = [
     path('^addstory/$',views.new_story,name="new_story"),
     path('^myprofile/$',views.person_info,name="user_profile"),
     path('^addbusiness/$',views.new_business,name="register-business"),
-    path('^hood-contacts/$',views.show_contact,name="show-contact")
+    path('^hood-contacts/$',views.show_contact,name="show-contact"),
+    path('^searchbuisness/$',views.search_business,name="search_business")
+
 
 ]

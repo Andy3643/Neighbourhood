@@ -99,14 +99,16 @@ class Business(models.Model):
 
     def delete_business(self):
         self.delete()
+        
+    def update_business(self):
+        self.save()
 
     @classmethod
     def search_business(cls,search_term):
         business = Business.objects.get(business_name__icontains=search_term)
         return business
 
-    def update_business(self):
-        self.save()
+   
 
 
 
@@ -134,15 +136,4 @@ class Neighborhood_contact(models.Model):
 
     def __str__(self):
         return f'{self.department} department contact from {self.neighborhood.name} Neighborhood'
-
-class Announcement(models.Model):
-    '''
-    Announcements model
-    '''
-    title = models.CharField(max_length=30)
-    announcement = models.TextField()
-    neighborhood = models.ForeignKey(Neighborhood,on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.title} Announcement for {self.neighborhood.name} Neighborhood' 
 
