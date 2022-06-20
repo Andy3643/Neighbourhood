@@ -35,7 +35,7 @@ def signout(request):
     return redirect ("login")
 
 #Home page
-#@login_required
+@login_required
 def Index_view(request):
     '''
     Main home page view
@@ -65,7 +65,7 @@ def Index_view(request):
 
 
 
-#@login_required
+@login_required
 def profile(request):
     '''
     This method handles the user profile 
@@ -90,7 +90,7 @@ def profile(request):
     return render(request,'users/profile.html',context)
 
 
-#@login_required
+@login_required
 def new_story(request):
     '''
     Add neighbourhood stories
@@ -116,7 +116,7 @@ def new_story(request):
 
 
 
-#@login_required
+@login_required
 def person_info(request):
     '''
     will show users profile and their neighbours
@@ -133,7 +133,7 @@ def person_info(request):
 
     return render(request,"users/my_profile.html",context)
 
-#@login_required
+@login_required
 def new_business(request):
     '''
     This view will handle user adding buisness to neighbourehood 
@@ -151,7 +151,7 @@ def new_business(request):
         form = BusinessForm()
         return render(request,"stories/post_business.html",{"form":form})
  
-#@login_required   
+@login_required   
 def show_contact(request):
     '''
     function to display contacts in the neighbourhood
@@ -164,7 +164,7 @@ def show_contact(request):
     }
     return render(request,"stories/contacts.html",context)
 
-#@login_required
+@login_required
 def search_business(request):
     if 'business' in request.GET and request.GET["business"]:
         search_term = request.GET.get("business")
