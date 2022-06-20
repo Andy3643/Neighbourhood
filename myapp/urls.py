@@ -13,7 +13,8 @@ urlpatterns = [
     path('^myprofile/$',views.person_info,name="user_profile"),
     path('^addbusiness/$',views.new_business,name="register-business"),
     path('^hood-contacts/$',views.show_contact,name="show-contact"),
-    path('^searchbuisness/$',views.search_business,name="search_business")
+    path('^searchbuisness/$',views.search_business,name="search_business"),
+    path('signout/',views.signout,name='signout'),
 
 
 ]

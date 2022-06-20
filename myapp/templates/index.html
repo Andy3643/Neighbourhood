@@ -3,20 +3,20 @@
 
 {% block content %}
 {% include 'navbar.html' %}
-<h1>Hi josh</h1>
-<a href="{% url 'login'%}"><button>Login</button></a>
-<p>one</p>
-<a href="{% url 'register' %}"><button>Sign-up</button></a>
-<p>Story</p>
-<a href="{% url 'new_story' %}"><button>Add story</button></a>
-<p>profile</p>
-<a href="{% url 'user_profile' %}"><button>My Profile</button></a>
-<p>add bussiness</p>
-<a href="{% url 'register-business' %}"><button>Add bussiness</button></a>
+
+
+    <div class="introdiv text-center">
+        <div class="title">
+            <h1>Welcome to<br>{{user.profile.neighborhood}}</h1>
+        </div>
+        <!-- <img width="100%" src="../static/images/five1.jpg" alt="">
+        <img id="display-photo"> -->
+    </div>
 
 
 
- <div class="container" >
+<div class="indexbg">
+ <div class="container mt-5" >
     <div class="row">
 
         <div class="col-4">
@@ -89,5 +89,5 @@
 <a href="{% url 'show-contact' %}"><button class="contactbtn">Contacts</button></a>
     </div>
 </div>
-
+</div>
 {% endblock %}

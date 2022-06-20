@@ -2,6 +2,8 @@ from django.shortcuts import render,redirect
 from django.contrib import messages
 from .forms import *
 from .models import *
+from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.decorators import login_required
 #from django.contrib.auth.decorators import login_required
 
 
@@ -24,6 +26,13 @@ def register(request):
         'form':form
     }
     return render(request,"users/sign-up.html",context)
+
+
+
+def signout(request):
+    logout(request)
+    messages.success(request,"You have logged out, we will be glad to have you back again")
+    return redirect ("login")
 
 #Home page
 #@login_required
