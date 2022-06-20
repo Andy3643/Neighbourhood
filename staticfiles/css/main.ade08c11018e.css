@@ -1,0 +1,72 @@
+h1{
+    color:white;
+    font-weight: bold;
+}
+.contactbtn{
+    color: white;
+    font-weight: bold;
+    background-color:rgb(172, 24, 73);
+    border: none;
+    padding: 0.5%;
+    position: fixed;
+    bottom: 6%;
+    left: 3%;
+}
+.contactbtn:hover{
+    background-color: green;
+}
+#hint_id_password1{
+    display: none;
+}
+#hint_id_username{
+    display: none;
+}
+#hint_id_password2{
+    display: none;
+}
+.whitecolortxt{
+    color: white;
+}
+.introdiv{
+    height: 50vh;
+    background:linear-gradient( rgba(0,0,0,0.4),rgba(0,0,0,0.4) ),url("../images/five1.2f499166b60e.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+    padding-top: 20vh;
+}
+.profilebg{
+    height: 100vh;
+    background:linear-gradient( rgba(0,0,0,0.4),rgba(0,0,0,0.4) ),url("../images/four.7ceb0ae7db6a.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+
+}
+.indexbg{
+    background:rgba(123, 123, 123, 0.3);
+}
+.addstory{
+    color: white;
+    height: 100vh;
+    background:linear-gradient( rgba(0,0,0,0.4),rgba(0,0,0,0.4) ),url("../images/seven.11c9aa51ac47.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+.loginbg{
+    color: white;
+    height: 100vh;
+    background:linear-gradient( rgba(0,0,0,0.7),rgba(0,0,0,0.7) ),url("../images/one.2e0eda9babe2.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+.contactsbg{
+    color: white;
+    height: 100vh;
+    background:linear-gradient( rgba(0,0,0,0.4),rgba(0,0,0,0.4) ),url("../images/seven.11c9aa51ac47.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
