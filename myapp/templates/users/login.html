@@ -3,9 +3,11 @@
 
 {% block content %}
 {% include 'navbar.html' %}
-    <div class="row mt-5">
+<div class="loginbg">
+
+    <div class="row">
         <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <div class="col-md-4 mt-5">
     <div class="content-section">
         <form action="" method="POST">
             {% csrf_token %}
@@ -14,14 +16,15 @@
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Log in</button>
+                <button class="btn btn-success" type="submit">Log in</button>
             </div>
         </form>
         <div class="border-top pt-3">
-            <small class="text-muted">Dont have an Account<a href="{% url 'register' %}" class="ml-2">Sign up</a></small>
+            <small style="color:white ;" class="text-muted">Dont have an Account<a style="color:white;" href="{% url 'register' %}" class="ml-2">Sign up</a></small>
         </div>
     </div>
 </div>
 <div class="col-md-4"></div>
+</div>
 </div>
 {% endblock %}

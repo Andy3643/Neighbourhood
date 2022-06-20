@@ -45,7 +45,27 @@ h1{
 }
 .indexbg{
     background:rgba(123, 123, 123, 0.3);
-    
+}
+.addstory{
+    color: white;
+    height: 100vh;
+    background:linear-gradient( rgba(0,0,0,0.4),rgba(0,0,0,0.4) ),url(../images/seven.jpg);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+.loginbg{
+    color: white;
+    height: 100vh;
+    background:linear-gradient( rgba(0,0,0,0.7),rgba(0,0,0,0.7) ),url(../images/one.jpg);
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: cover;
+}
+.contactsbg{
+    color: white;
+    height: 100vh;
+    background:linear-gradient( rgba(0,0,0,0.4),rgba(0,0,0,0.4) ),url(../images/seven.jpg);
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;

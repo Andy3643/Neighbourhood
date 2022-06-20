@@ -2,18 +2,30 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-
-<div class="content-section">
-    <form  method="POST">
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Add a story</legend>
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Submit</button>
+{% include 'navbar.html' %}
+<div class="addstory">
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 mt-5">
+            <div class="content-section">
+                <form  method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Add a story</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </form>
+        <div class="col-3"></div>
+    </div>
 </div>
 
+
+
+</div>
 {% endblock %}
